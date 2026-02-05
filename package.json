@@ -1,0 +1,29 @@
+{
+  "name": "area-card-smart",
+  "version": "1.0.0",
+  "description": "A Home Assistant Lovelace card that automatically detects area activity without binary sensors",
+  "main": "area-card-smart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/area-card-smart.git"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "hacs",
+    "custom-card",
+    "area-card",
+    "smart-home"
+  ],
+  "author": "Wouter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/area-card-smart/issues"
+  },
+  "homepage": "https://github.com/yourusername/area-card-smart#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
