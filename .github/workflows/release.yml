@@ -5,43 +5,53 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get version from tag
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          name: Area Card Smart v${{ steps.get_version.outputs.VERSION }}
           body: |
-            ## Area Card Smart ${{ steps.get_version.outputs.VERSION }}
+            # Area Card Smart v${{ steps.get_version.outputs.VERSION }}
 
-            ### Installation
-            Install via HACS or download `area-card-smart.js` and add it to your `www` folder.
+            **Smart area activity detection without binary sensors!**
 
-            ### Changes
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+            ## Installation
+
+            ### Via HACS (Recommended)
+            1. Open HACS → Frontend
+            2. Click ⋮ → Custom repositories
+            3. Add: `https://github.com/TheIronRock95/area-card-smart`
+            4. Category: Lovelace
+            5. Download and restart Home Assistant
+
+            ### Manual Installation
+            1. Download `area-card-smart.js` below
+            2. Copy to `config/www/`
+            3. Add to Lovelace resources
+            4. Restart Home Assistant
+
+            ## Features
+            - 🔍 Automatic activity detection
+            - 🎨 Dynamic icon coloring
+            - 🖱️ Visual configuration editor
+            - ⚡ Real-time updates
+
+            [View Full Documentation](https://github.com/TheIronRock95/area-card-smart#readme)
+          files: |
+            area-card-smart.js
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./area-card-smart.js
-          asset_name: area-card-smart.js
-          asset_content_type: application/javascript
