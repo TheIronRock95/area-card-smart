@@ -247,9 +247,9 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## 📞 Support
 
-- 🐛 [Report a Bug](https://github.com/yourusername/area-card-smart/issues)
-- 💡 [Request a Feature](https://github.com/yourusername/area-card-smart/issues)
-- 📖 [View Documentation](https://github.com/yourusername/area-card-smart)
+- 🐛 [Report a Bug](https://github.com/TheIronRock95/area-card-smart/issues)
+- 💡 [Request a Feature](https://github.com/TheIronRock95/area-card-smart/issues)
+- 📖 [View Documentation](https://github.com/TheIronRock95/area-card-smart)
 
 ---
 
