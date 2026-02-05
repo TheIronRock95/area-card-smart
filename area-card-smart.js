@@ -3,7 +3,7 @@
  * A wrapper for area-card-plus that automatically detects area activity
  * without requiring binary sensors.
  *
- * @version 0.0.1
+ * @version 0.0.2
  * @author sironite
  * @license MIT
  */
@@ -218,29 +218,23 @@ class AreaCardSmart extends HTMLElement {
     const isActive = this._isAreaActive();
     const iconColor = isActive ? this._config.active_color : this._config.inactive_color;
 
+    // Start with area-card-plus config, keeping ALL original options
     const config = {
       type: 'custom:area-card-plus',
-      area: this._config.area,
-      area_icon: this._config.area_icon,
-      design: this._config.design,
-      layout: this._config.layout,
-      card_mod: {
-        style: this._generateCardModStyle(iconColor)
-      }
+      ...this._config  // Pass through ALL config options
     };
 
-    // Add optional theme
-    if (this._config.theme) {
-      config.theme = this._config.theme;
-    }
+    // Remove our custom properties that area-card-plus doesn't understand
+    delete config.active_color;
+    delete config.inactive_color;
+    delete config.active_domains;
+    delete config.hidden_entities;
 
-    // Pass through any additional config options
-    const passthroughKeys = ['entities', 'sensor', 'buttons', 'tap_action', 'hold_action', 'double_tap_action'];
-    passthroughKeys.forEach(key => {
-      if (this._config[key]) {
-        config[key] = this._config[key];
-      }
-    });
+    // Add card_mod for icon coloring
+    config.card_mod = {
+      ...(config.card_mod || {}),  // Preserve existing card_mod if any
+      style: this._generateCardModStyle(iconColor)
+    };
 
     return config;
   }
@@ -322,6 +316,9 @@ class AreaCardSmartEditor extends HTMLElement {
       this.attachShadow({ mode: 'open' });
     }
 
+    // Get all areas from Home Assistant
+    const areas = this._getAreas();
+
     this.shadowRoot.innerHTML = `
       <style>
         .card-config {
@@ -366,12 +363,14 @@ class AreaCardSmartEditor extends HTMLElement {
 
         <div class="config-row">
           <label>Area <span class="required">*</span></label>
-          <input
-            type="text"
-            id="area"
-            .value="${this._config.area || ''}"
-            placeholder="woonkamer"
-          />
+          <select id="area">
+            <option value="">Select area...</option>
+            ${areas.map(area => `
+              <option value="${area.area_id}" ${this._config.area === area.area_id ? 'selected' : ''}>
+                ${area.name}
+              </option>
+            `).join('')}
+          </select>
         </div>
 
         <div class="config-row">
@@ -444,6 +443,21 @@ class AreaCardSmartEditor extends HTMLElement {
 
     // Add event listeners
     this._attachEventListeners();
+  }
+
+  /**
+   * Get all areas from Home Assistant
+   * @returns {Array} - List of area objects
+   */
+  _getAreas() {
+    if (!this._hass || !this._hass.areas) {
+      return [];
+    }
+
+    return Object.keys(this._hass.areas).map(areaId => ({
+      area_id: areaId,
+      name: this._hass.areas[areaId].name
+    })).sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /**
@@ -521,7 +535,7 @@ window.customCards.push({
 });
 
 console.info(
-  '%c AREA-CARD-SMART %c v0.0.1 ',
+  '%c AREA-CARD-SMART %c v0.0.2 ',
   'color: white; background: #2196F3; font-weight: 700;',
   'color: #2196F3; background: white; font-weight: 700;'
 );
