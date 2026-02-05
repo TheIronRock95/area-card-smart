@@ -3,7 +3,7 @@
  * A wrapper for area-card-plus that automatically detects area activity
  * without requiring binary sensors.
  *
- * @version 0.0.2
+ * @version 0.0.3
  * @author sironite
  * @license MIT
  */
@@ -190,7 +190,7 @@ class AreaCardSmart extends HTMLElement {
       return;
     }
 
-    // Build the area-card-plus configuration with card_mod
+    // Build the area-card-plus configuration WITHOUT card_mod
     const cardConfig = this._buildCard();
 
     // Create the card element
@@ -208,16 +208,16 @@ class AreaCardSmart extends HTMLElement {
       this._card.setConfig(cardConfig);
       this._card.hass = this._hass;
     }
+
+    // Apply icon coloring directly via CSS (no card-mod needed!)
+    this._applyIconStyling();
   }
 
   /**
-   * Build the area-card-plus configuration with card_mod styling
+   * Build the area-card-plus configuration (NO card_mod to avoid conflicts)
    * @returns {Object} - Card configuration object
    */
   _buildCard() {
-    const isActive = this._isAreaActive();
-    const iconColor = isActive ? this._config.active_color : this._config.inactive_color;
-
     // Start with area-card-plus config, keeping ALL original options
     const config = {
       type: 'custom:area-card-plus',
@@ -230,32 +230,39 @@ class AreaCardSmart extends HTMLElement {
     delete config.active_domains;
     delete config.hidden_entities;
 
-    // Add card_mod for icon coloring
-    config.card_mod = {
-      ...(config.card_mod || {}),  // Preserve existing card_mod if any
-      style: this._generateCardModStyle(iconColor)
-    };
-
     return config;
   }
 
   /**
-   * Generate card_mod CSS for icon coloring
-   * @param {string} color - RGB color string
-   * @returns {string} - CSS string
+   * Apply icon styling directly via CSS (avoids card-mod conflicts)
    */
-  _generateCardModStyle(color) {
-    return `
-      ha-card {
-        --area-card-icon-color: ${color} !important;
-      }
-      .area-icon ha-icon {
-        color: ${color} !important;
-      }
-      .icon-container ha-icon {
-        color: ${color} !important;
-      }
-    `;
+  _applyIconStyling() {
+    if (!this._card) {
+      return;
+    }
+
+    const isActive = this._isAreaActive();
+    const iconColor = isActive ? this._config.active_color : this._config.inactive_color;
+
+    // Apply CSS custom property to the card
+    const cardElement = this._card.querySelector('ha-card') || this._card;
+    if (cardElement) {
+      cardElement.style.setProperty('--area-card-icon-color', iconColor);
+    }
+
+    // Find and color all icons in the card
+    const icons = this._card.querySelectorAll('ha-icon');
+    icons.forEach(icon => {
+      icon.style.color = iconColor;
+    });
+
+    // Also check in shadow DOM
+    if (this._card.shadowRoot) {
+      const shadowIcons = this._card.shadowRoot.querySelectorAll('ha-icon');
+      shadowIcons.forEach(icon => {
+        icon.style.color = iconColor;
+      });
+    }
   }
 
   /**
@@ -535,7 +542,7 @@ window.customCards.push({
 });
 
 console.info(
-  '%c AREA-CARD-SMART %c v0.0.2 ',
+  '%c AREA-CARD-SMART %c v0.0.3 ',
   'color: white; background: #2196F3; font-weight: 700;',
   'color: #2196F3; background: white; font-weight: 700;'
 );

@@ -1,6 +1,6 @@
 {
   "name": "area-card-smart",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Home Assistant Lovelace card that automatically detects area activity without binary sensors",
   "main": "area-card-smart.js",
   "scripts": {
