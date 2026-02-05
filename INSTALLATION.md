@@ -42,7 +42,7 @@ Before you begin, ensure you have:
 Open a terminal and clone your new repository:
 
 ```bash
-git clone https://github.com/yourusername/area-card-smart.git
+git clone https://github.com/TheIronRock95/area-card-smart.git
 cd area-card-smart
 ```
 
@@ -130,7 +130,7 @@ Alternatively, you can create a release manually:
 3. Click the **three dots** (⋮) in the top right corner
 4. Select **"Custom repositories"**
 5. Add your repository:
-   - **Repository**: `https://github.com/yourusername/area-card-smart`
+   - **Repository**: `https://github.com/TheIronRock95/area-card-smart`
    - **Category**: Lovelace
 6. Click **"Add"**
 7. Find **"Area Card Smart"** in the list
@@ -327,10 +327,10 @@ cards:
 
 ## Support & Resources
 
-- 📖 [Full Documentation](https://github.com/yourusername/area-card-smart)
-- 🐛 [Report Issues](https://github.com/yourusername/area-card-smart/issues)
-- 💡 [Request Features](https://github.com/yourusername/area-card-smart/issues)
-- 🤝 [Contribute](https://github.com/yourusername/area-card-smart/pulls)
+- 📖 [Full Documentation](https://github.com/TheIronRock95/area-card-smart)
+- 🐛 [Report Issues](https://github.com/TheIronRock95/area-card-smart/issues)
+- 💡 [Request Features](https://github.com/TheIronRock95/area-card-smart/issues)
+- 🤝 [Contribute](https://github.com/TheIronRock95/area-card-smart/pulls)
 
 ## Additional Resources
 

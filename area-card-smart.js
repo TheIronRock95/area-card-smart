@@ -3,8 +3,8 @@
  * A wrapper for area-card-plus that automatically detects area activity
  * without requiring binary sensors.
  *
- * @version 1.0.0
- * @author Wouter
+ * @version 0.0.1
+ * @author sironite
  * @license MIT
  */
 
@@ -517,11 +517,11 @@ window.customCards.push({
   name: 'Area Card Smart',
   description: 'Automatically detect area activity without binary sensors',
   preview: true,
-  documentationURL: 'https://github.com/wouter/area-card-smart'
+  documentationURL: 'https://github.com/TheIronRock95/area-card-smart'
 });
 
 console.info(
-  '%c AREA-CARD-SMART %c v1.0.0 ',
+  '%c AREA-CARD-SMART %c v0.0.1 ',
   'color: white; background: #2196F3; font-weight: 700;',
   'color: #2196F3; background: white; font-weight: 700;'
 );

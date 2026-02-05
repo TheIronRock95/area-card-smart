@@ -1,8 +1,8 @@
 # Area Card Smart
 
 [![HACS](https://img.shields.io/badge/hacs-custom-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![GitHub release](https://img.shields.io/github/release/yourusername/area-card-smart?style=for-the-badge)](https://github.com/yourusername/area-card-smart/releases/)
-[![License](https://img.shields.io/github/license/yourusername/area-card-smart?style=for-the-badge)](LICENSE)
+[![GitHub release](https://img.shields.io/github/release/TheIronRock95/area-card-smart?style=for-the-badge)](https://github.com/TheIronRock95/area-card-smart/releases/)
+[![License](https://img.shields.io/github/license/TheIronRock95/area-card-smart?style=for-the-badge)](https://github.com/TheIronRock95/area-card-smart/blob/main/LICENSE)
 
 A smart wrapper for [area-card-plus](https://github.com/xBourner/area-card-plus) that **automatically detects area activity** without requiring binary sensors!
 
@@ -54,7 +54,7 @@ area_icon: mdi:sofa
 2. Click on "Frontend"
 3. Click the three dots in the top right corner
 4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/yourusername/area-card-smart`
+5. Add this repository URL: `https://github.com/TheIronRock95/area-card-smart`
 6. Select category: "Lovelace"
 7. Click "Add"
 8. Find "Area Card Smart" in HACS and click "Download"
@@ -62,7 +62,7 @@ area_icon: mdi:sofa
 
 ### Manual Installation
 
-1. Download `area-card-smart.js` from the [latest release](https://github.com/yourusername/area-card-smart/releases)
+1. Download `area-card-smart.js` from the [latest release](https://github.com/TheIronRock95/area-card-smart/releases)
 2. Copy it to your `config/www` folder
 3. Add the following to your Lovelace dashboard configuration:
 ```yaml
@@ -237,7 +237,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/TheIronRock95/area-card-smart/blob/main/LICENSE) file for details.
 
 ## 🙏 Credits
 
